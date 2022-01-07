@@ -1,13 +1,13 @@
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
-const createImageList = document.querySelector('.gallary');
+const createImageList = document.querySelector('.gallery');
 
 // const createGalleryMurkupList = createGalleryMurkup(galleryItems);
-console.log(createGalleryMurkup);
 
-const createGalleryMurkup = galleryItems.map(({ original, preview, description }) => {
-        return
-        `
+
+const createGalleryMurkup = galleryItems.map(({ original, preview, description }) => 
+        
+    `
         <div class="gallery__item">
          <a class="gallery__link" href="${original}">
           <img
@@ -18,18 +18,32 @@ const createGalleryMurkup = galleryItems.map(({ original, preview, description }
            />
          </a>
          </div>
-        `;
-    }).join('')
+        `
+).join('');
 
+// console.log(createGalleryMurkup);
+createImageList.insertAdjacentHTML('afterbegin', createGalleryMurkup);
 
+createImageList.addEventListener('click', onClickImage)
 
-//  <a class="gallery__link" href="large-image.jpg">
-//     <img
-//       class="gallery__image"
-//       src="small-image.jpg"
-//       data-source="large-image.jpg"
-//       alt="Image description"
-//     />
-//   </a>
+function onClickImage(e) {
+    e.preventDefault()
+    
+    if (e.currentTarget === e.target) {
+        return
+    }
+    const selectedImage = e.target.dataset.source;
+    const altImgModal = e.target.alt
+    console.log(selectedImage, altImgModal)
 
-// console.log(galleryItems);
+    const instance = basicLightbox.create(`
+    <div class="modal">
+        <img
+            src ='${selectedImage}'
+            alt= '${altImgModal}'
+           />
+    </div>
+`)
+
+instance.show()
+}
