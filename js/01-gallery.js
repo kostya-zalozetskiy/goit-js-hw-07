@@ -46,4 +46,11 @@ function onClickImage(e) {
 `)
 
 instance.show()
+window.addEventListener('keydown', closeModal);
+
+    function closeModal(e) {
+        if (e.code === "Escape"){
+            instance.close()
+        }
+    }
 }
